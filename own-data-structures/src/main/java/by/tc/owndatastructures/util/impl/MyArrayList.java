@@ -104,7 +104,9 @@ public class MyArrayList implements MyList, Serializable, Cloneable {
     }
 
     private void resize(int newSize) {
-        array = Arrays.copyOf(array, newSize);
+        Object[] temp = array;
+        array = new Object[newSize];
+        System.arraycopy(temp, 0, array, 0, size);
     }
 
     private void checkRange(int index) throws IndexOutListSizeException {

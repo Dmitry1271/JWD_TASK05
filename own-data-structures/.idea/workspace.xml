@@ -17,8 +17,8 @@
       <file leaf-file-name="Runner.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/by/tc/owndatastructures/run/Runner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="73" column="38" lean-forward="false" selection-start-line="73" selection-start-column="38" selection-end-line="73" selection-end-column="38" />
+            <state relative-caret-position="202">
+              <caret line="76" column="53" lean-forward="false" selection-start-line="76" selection-start-column="53" selection-end-line="76" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,7 +29,7 @@
       <file leaf-file-name="ArrayList.java" pinned="false" current-in-tab="false">
         <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/ArrayList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-12291">
+            <state relative-caret-position="-10863">
               <caret line="96" column="22" lean-forward="true" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
               <folding>
                 <element signature="e#0#54151#0" expanded="true" />
@@ -49,7 +49,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyList.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MyList.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/by/tc/owndatastructures/util/MyList.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
@@ -86,15 +86,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyArrayList.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MyArrayList.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/by/tc/owndatastructures/util/impl/MyArrayList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="56" column="4" lean-forward="true" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="13" />
+            <state relative-caret-position="153">
+              <caret line="105" column="38" lean-forward="false" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2402#2403#0" expanded="true" />
-                <element signature="e#2455#2456#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -802,12 +800,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1511550143239</updated>
-      <workItem from="1511550179347" duration="12713000" />
+      <workItem from="1511550179347" duration="13688000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12713000" />
+    <option name="totallyTimeSpent" value="13688000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
@@ -822,7 +820,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -987,9 +985,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/tc/owndatastructures/util/MyList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12291">
+        <state relative-caret-position="-10863">
           <caret line="96" column="22" lean-forward="true" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
           <folding>
             <element signature="e#0#54151#0" expanded="true" />
@@ -1000,8 +1006,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/tc/owndatastructures/run/Runner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="73" column="38" lean-forward="false" selection-start-line="73" selection-start-column="38" selection-end-line="73" selection-end-column="38" />
+        <state relative-caret-position="202">
+          <caret line="76" column="53" lean-forward="false" selection-start-line="76" selection-start-column="53" selection-end-line="76" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1010,21 +1016,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/tc/owndatastructures/util/impl/MyArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="56" column="4" lean-forward="true" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="13" />
+        <state relative-caret-position="153">
+          <caret line="105" column="38" lean-forward="false" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2402#2403#0" expanded="true" />
-            <element signature="e#2455#2456#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/tc/owndatastructures/util/MyList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

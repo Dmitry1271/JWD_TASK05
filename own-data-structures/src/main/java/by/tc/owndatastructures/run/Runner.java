@@ -72,5 +72,9 @@ public class Runner {
         System.out.println(list1.get(1));
         System.out.println(list.get(4));
         System.out.println(list1.get(3));
+        for(int i = 0; i<1000; ++i){
+            list.add(i);
+            System.out.println(list.get(list.size()-1));
+        }
     }
 }
