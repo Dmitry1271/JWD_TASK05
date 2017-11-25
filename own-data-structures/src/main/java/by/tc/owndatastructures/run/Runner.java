@@ -2,19 +2,17 @@ package by.tc.owndatastructures.run;
 
 import by.tc.owndatastructures.exception.IndexOutListSizeException;
 import by.tc.owndatastructures.util.Iterator;
-import by.tc.owndatastructures.util.MyList;
-import by.tc.owndatastructures.util.impl.MyArrayList;
+import by.tc.owndatastructures.util.Linked;
+import by.tc.owndatastructures.util.impl.LinkedList;
+import by.tc.owndatastructures.util.impl.SimpleList;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by cplus on 25.11.2017.
  */
 public class Runner {
     public static void main(String[] args) throws IndexOutListSizeException {
-        MyList list = new MyArrayList(2);
+        SimpleList list = new SimpleList(2);
         System.out.println(list.isEmpty());
         list.add(5);
         list.add("afs");
@@ -52,7 +50,7 @@ public class Runner {
         System.out.println(list.size());
         list.add(43);
         list.add(null);
-        MyList list1 = new MyArrayList();
+        SimpleList list1 = new SimpleList();
         list1.add(43);
         list1.add(null);
         list1.add("null");
@@ -76,5 +74,45 @@ public class Runner {
             list.add(i);
             System.out.println(list.get(list.size()-1));
         }
+
+
+        /*List<Object> list = new LinkedList<>();
+        list.add("sad");
+        list.add("q");
+        list.add(1);
+        list.add(2);
+        System.out.println(list.get(0));
+        LinkedList<Object> list1 = new LinkedList<>();
+        list1.addFirst("sad");
+        list1.addFirst("q");
+        list1.addFirst(1);
+        list1.addFirst(2);
+
+        LinkedList<Object> list2 = new LinkedList<>();
+        list2.addLast("sad");
+        list2.addLast("q");
+        list2.addLast(1);
+        list2.addLast(2);
+        System.out.println(list);
+        System.out.println(list1);
+        System.out.println(list2);*/
+
+            /*Linked list = new LinkedList();
+
+            list.addLast(-4);
+            list.addLast(5);
+        list.addFirst(1);
+        list.addFirst(2);
+        list.addFirst(3);
+        list.addFirst(4);
+        list.add("ewafsd");
+        list.add(4);
+            list.update(2,909090);
+        System.out.println(list.get(2));
+        System.out.println(list.contains(null));
+        System.out.println(list.get(5));*/
+
+
+
     }
 }

@@ -5,7 +5,7 @@ import by.tc.owndatastructures.exception.IndexOutListSizeException;
 /**
  * Created by cplus on 25.11.2017.
  */
-public interface MyList extends Container{
+public interface Simple extends Container {
     boolean add(Object value);
 
     Object get(int index) throws IndexOutListSizeException;
