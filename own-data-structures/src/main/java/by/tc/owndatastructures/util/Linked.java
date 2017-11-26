@@ -8,9 +8,9 @@ public interface Linked extends Simple{
 
     void addLast(Object elem);
 
-    void removeFirst();
+    Object removeFirst();
 
-    void removeLast();
+    Object removeLast();
 
     int size();
 }

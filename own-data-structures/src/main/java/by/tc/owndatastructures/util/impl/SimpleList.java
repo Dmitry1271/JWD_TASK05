@@ -57,13 +57,13 @@ public class SimpleList implements Simple, Serializable, Cloneable {
     }
 
     @Override
-    public Object get(int index) throws IndexOutListSizeException {
+    public Object get(int index){
         checkRange(index);
         return array[index];
     }
 
     @Override
-    public Object remove(int index) throws IndexOutListSizeException {
+    public Object remove(int index){
         checkRange(index);
 
         Object oldValue = array[index];
@@ -85,7 +85,7 @@ public class SimpleList implements Simple, Serializable, Cloneable {
     }
 
     @Override
-    public void update(int index, Object value) throws IndexOutListSizeException {
+    public void update(int index, Object value){
         checkRange(index);
         array[index] = value;
     }
@@ -114,7 +114,7 @@ public class SimpleList implements Simple, Serializable, Cloneable {
         System.arraycopy(temp, 0, array, 0, size);
     }
 
-    private void checkRange(int index) throws IndexOutListSizeException {
+    private void checkRange(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutListSizeException("Index: " + index + ", Size: " + size);
         }

@@ -3,7 +3,7 @@ package by.tc.owndatastructures.exception;
 /**
  * Created by cplus on 25.11.2017.
  */
-public class IndexOutListSizeException extends Exception{
+public class IndexOutListSizeException extends RuntimeException{
     private static final long serialVersionUID = -4578223986297997887L;
 
     public IndexOutListSizeException() {

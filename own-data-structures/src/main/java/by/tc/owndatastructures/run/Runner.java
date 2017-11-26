@@ -12,7 +12,7 @@ import by.tc.owndatastructures.util.impl.SimpleList;
  */
 public class Runner {
     public static void main(String[] args) throws IndexOutListSizeException {
-        SimpleList list = new SimpleList(2);
+        /*SimpleList list = new SimpleList(2);
         System.out.println(list.isEmpty());
         list.add(5);
         list.add("afs");
@@ -73,7 +73,7 @@ public class Runner {
         for(int i = 0; i<1000; ++i){
             list.add(i);
             System.out.println(list.get(list.size()-1));
-        }
+        }*/
 
 
         /*List<Object> list = new LinkedList<>();
@@ -97,20 +97,26 @@ public class Runner {
         System.out.println(list1);
         System.out.println(list2);*/
 
-            /*Linked list = new LinkedList();
+        Linked list = new LinkedList();
 
-            list.addLast(-4);
-            list.addLast(5);
-        list.addFirst(1);
-        list.addFirst(2);
-        list.addFirst(3);
-        list.addFirst(4);
-        list.add("ewafsd");
-        list.add(4);
-            list.update(2,909090);
-        System.out.println(list.get(2));
-        System.out.println(list.contains(null));
-        System.out.println(list.get(5));*/
+        //System.out.println(list.isEmpty());
+        //System.out.println(list.size());
+        list.addFirst("qwer");
+        list.addLast(1);
+        list.addFirst("csd");
+        list.addLast(3);
+        list.addFirst("fsd");
+        list.addFirst("fsd1");
+       // System.out.println(list.size());
+        //System.out.println(list.get(0));
+        System.out.println(list.removeFirst());
+        System.out.println(list.removeFirst());
+        System.out.println(list.removeFirst());
+        System.out.println(list.removeFirst());
+        System.out.println(list.removeFirst());
+        System.out.println(list.removeFirst());
+        System.out.println(list);
+        //System.out.println(list.size());
 
 
 
