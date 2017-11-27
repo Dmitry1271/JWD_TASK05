@@ -6,6 +6,8 @@ import by.tc.owndatastructures.util.Linked;
 import by.tc.owndatastructures.util.impl.LinkedList;
 import by.tc.owndatastructures.util.impl.SimpleList;
 
+import java.util.List;
+
 
 /**
  * Created by cplus on 25.11.2017.
@@ -107,16 +109,32 @@ public class Runner {
         list.addLast(3);
         list.addFirst("fsd");
         list.addFirst("fsd1");
-       // System.out.println(list.size());
-        //System.out.println(list.get(0));
+        list.addFirst(null);
+
+       /* System.out.println(list.removeFirst());
         System.out.println(list.removeFirst());
         System.out.println(list.removeFirst());
         System.out.println(list.removeFirst());
         System.out.println(list.removeFirst());
-        System.out.println(list.removeFirst());
-        System.out.println(list.removeFirst());
+        System.out.println(list.removeFirst());*/
         System.out.println(list);
-        //System.out.println(list.size());
+
+        Linked linked = new LinkedList();
+        linked.addFirst(3);
+        linked.addFirst(1);
+        linked.addFirst("qwer");
+        linked.addFirst("csd");
+        linked.addFirst("fsd");
+        linked.addFirst("fsd1");
+        linked.addFirst(null);
+        linked.addLast(45893);
+
+        Iterator iter = linked.getIterator();
+        while (iter.hasNext()){
+            System.out.println(iter.next());
+        }
+        System.out.println(iter.hasNext());
+
 
 
 

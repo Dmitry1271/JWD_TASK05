@@ -18,25 +18,25 @@ public class LinkedList implements Linked {
         first = new Node();
         last = new Node();
 
-        first.setNext(last);
-        last.setPrev(first);
+        first.next = last;
+        last.prev = first;
     }
 
     @Override
     public void addFirst(Object elem) {
         Node next = first;
-        next.setElem(elem);
+        next.elem = elem;
         first = new Node(null, null, next);
-        next.setPrev(first);
+        next.prev = first;
         size++;
     }
 
     @Override
     public void addLast(Object elem) {
         Node prev = last;
-        prev.setElem(elem);
+        prev.elem = elem;
         last = new Node(null, prev, null);
-        prev.setNext(last);
+        prev.next = last;
         size++;
     }
 
@@ -46,10 +46,10 @@ public class LinkedList implements Linked {
             throw new NoListElementException("Size: " + size);
         }
 
-        Node forRemove = first.getNext();
+        Node forRemove = first.next;
 
-        Object elem = forRemove.getElem();
-        first.setNext(forRemove.getNext());
+        Object elem = forRemove.elem;
+        first.next = forRemove.next;
 
         size--;
         return elem;
@@ -60,10 +60,10 @@ public class LinkedList implements Linked {
         if (isEmpty()) {
             throw new NoListElementException("Size: " + size);
         }
-        Node forRemove = last.getPrev();
+        Node forRemove = last.prev;
 
-        Object elem = forRemove.getElem();
-        last.setPrev(forRemove.getPrev());
+        Object elem = forRemove.elem;
+        last.prev = forRemove.prev;
 
         size--;
         return elem;
@@ -78,7 +78,7 @@ public class LinkedList implements Linked {
     @Override
     public Object get(int index) {
         checkRange(index);
-        return getIndexNode(index).getElem();
+        return getIndexNode(index).elem;
 
     }
 
@@ -86,13 +86,13 @@ public class LinkedList implements Linked {
     public Object remove(int index) {
         checkRange(index);
         Node forRemove = getIndexNode(index);
-        Object elem = forRemove.getElem();
+        Object elem = forRemove.elem;
 
-        Node next = forRemove.getNext();
-        Node prev = forRemove.getPrev();
+        Node next = forRemove.next;
+        Node prev = forRemove.prev;
 
-        next.setPrev(prev);
-        prev.setNext(next);
+        next.prev = prev;
+        prev.next = next;
         size--;
 
         return elem;
@@ -106,7 +106,7 @@ public class LinkedList implements Linked {
     @Override
     public void update(int index, Object value) {
         checkRange(index);
-        getIndexNode(index).setElem(value);
+        getIndexNode(index).elem = value;
     }
 
     @Override
@@ -114,9 +114,9 @@ public class LinkedList implements Linked {
         Node node = first;
         Object elem;
         for (int i = 0; i < size; ++i) {
-            node = node.getNext();
-            elem = node.getElem();
-            if (elem == null ? value == null : elem.equals(value)) {
+            node = node.next;
+            elem = node.elem;
+            if (elem != null ? elem.equals(value) : value == null) {
                 return true;
             }
         }
@@ -129,8 +129,29 @@ public class LinkedList implements Linked {
     }
 
     @Override
-    public Iterator getIterator() {//need add
-        return null;
+    public Iterator getIterator() {
+        return new LinkedIterator();
+    }
+
+    private class LinkedIterator implements Iterator {
+        private int index;
+        private Node current = first.next;
+
+        @Override
+        public boolean hasNext() {
+            return index < size;
+        }
+
+        @Override
+        public Object next() {
+            if (!this.hasNext()) {
+                throw new IndexOutListSizeException("Index: " + index + ", Size: " + size);
+            }
+            Object elem = current.elem;
+            current = current.next;
+            index++;
+            return elem;
+        }
     }
 
     private class Node {
@@ -138,37 +159,12 @@ public class LinkedList implements Linked {
         private Node prev;
         private Node next;
 
-        public Node() {
-
+        Node() {
         }
 
-        public Node(Object elem, Node prev, Node next) {
+        Node(Object elem, Node prev, Node next) {
             this.elem = elem;
             this.prev = prev;
-            this.next = next;
-        }
-
-        public Object getElem() {
-            return elem;
-        }
-
-        public void setElem(Object elem) {
-            this.elem = elem;
-        }
-
-        public Node getPrev() {
-            return prev;
-        }
-
-        public void setPrev(Node prev) {
-            this.prev = prev;
-        }
-
-        public Node getNext() {
-            return next;
-        }
-
-        public void setNext(Node next) {
             this.next = next;
         }
     }
@@ -180,23 +176,33 @@ public class LinkedList implements Linked {
     }
 
     private Node getIndexNode(int index) {
-        Node result = first.getNext();
+        Node result = first.next;
         for (int i = 0; i < index; ++i) {
-            result = result.getNext();
+            result = result.next;
         }
         return result;
     }
 
     @Override
-    public boolean equals(Object o) {//need correct
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         LinkedList that = (LinkedList) o;
 
         if (size != that.size) return false;
-        if (first != null ? !first.equals(that.first) : that.first != null) return false;
-        return last != null ? last.equals(that.last) : that.last == null;
+
+        Node node = first.next;
+        Node thatNode = that.first.next;
+        int count = 0;
+
+        for (int i = 0; i < size; ++i) {
+            if (thatNode.elem != null ? thatNode.elem.equals(node.elem) : node.elem == null) {
+                count++;
+            }
+        }
+
+        return count == size;
     }
 
     @Override
@@ -210,14 +216,14 @@ public class LinkedList implements Linked {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("[");
-        Node current = first.getNext();
+        Node current = first.next;
 
         if (size > 0) {
             for (int i = 0; i < size - 1; ++i) {
-                result.append(current.getElem()).append(", ");
-                current = current.getNext();
+                result.append(current.elem).append(", ");
+                current = current.next;
             }
-            result.append(last.getPrev().getElem());
+            result.append(last.prev.elem);
         }
         result.append("]");
 

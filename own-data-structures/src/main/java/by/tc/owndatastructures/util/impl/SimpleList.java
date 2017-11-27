@@ -26,83 +26,6 @@ public class SimpleList implements Simple, Serializable, Cloneable {
         array = new Object[firstSize];
     }
 
-    public Iterator getIterator() {
-        return new MyListIterator();
-    }
-
-    private class MyListIterator implements Iterator {
-        private int index;
-
-        @Override
-        public boolean hasNext() {
-            return index < size;
-        }
-
-        @Override
-        public Object next() {
-            if (this.hasNext()) {
-                return array[index++];
-            }
-            return null;
-        }
-    }
-
-    @Override
-    public boolean add(Object value) {
-        if (size >= array.length) {
-            resize(array.length * 2);
-        }
-        array[size++] = value;
-        return true;
-    }
-
-    @Override
-    public Object get(int index){
-        checkRange(index);
-        return array[index];
-    }
-
-    @Override
-    public Object remove(int index){
-        checkRange(index);
-
-        Object oldValue = array[index];
-        int numberElements = size - index - 1;
-
-        if (numberElements > 0) {
-            System.arraycopy(array, index + 1, array, index, numberElements);
-        }
-
-        array[--size] = null;
-
-        return oldValue;
-
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public void update(int index, Object value){
-        checkRange(index);
-        array[index] = value;
-    }
-
-    @Override
-    public boolean contains(Object value) {
-        Object elem;
-        for (int i = 0; i < size; ++i) {
-            elem = array[i];
-
-            if (elem == null ? value == null : elem.equals(value)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public boolean isEmpty() {
         return size == 0;
@@ -137,11 +60,88 @@ public class SimpleList implements Simple, Serializable, Cloneable {
             elem = array[i];
             thatElem = that.array[i];
 
-            if (elem == null ? thatElem == null : elem.equals(thatElem)) {
+            if (elem != null ? elem.equals(thatElem) : thatElem == null) {
                 count++;
             }
         }
         return count == size;
+    }
+
+    public Iterator getIterator() {
+        return new MyListIterator();
+    }
+
+    private class MyListIterator implements Iterator {
+        private int index;
+
+        @Override
+        public boolean hasNext() {
+            return index < size;
+        }
+
+        @Override
+        public Object next() {
+            if (!this.hasNext()) {
+                throw new IndexOutListSizeException("Index: " + index + ", Size: " + size);
+            }
+            return array[index++];
+        }
+    }
+
+    @Override
+    public boolean add(Object value) {
+        if (size >= array.length) {
+            resize(array.length * 2);
+        }
+        array[size++] = value;
+        return true;
+    }
+
+    @Override
+    public Object get(int index) {
+        checkRange(index);
+        return array[index];
+    }
+
+    @Override
+    public Object remove(int index) {
+        checkRange(index);
+
+        Object oldValue = array[index];
+        int numberElements = size - index - 1;
+
+        if (numberElements > 0) {
+            System.arraycopy(array, index + 1, array, index, numberElements);
+        }
+
+        array[--size] = null;
+
+        return oldValue;
+
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public void update(int index, Object value) {
+        checkRange(index);
+        array[index] = value;
+    }
+
+    @Override
+    public boolean contains(Object value) {
+        Object elem;
+        for (int i = 0; i < size; ++i) {
+            elem = array[i];
+
+            if (elem != null ? elem.equals(value) : value == null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
