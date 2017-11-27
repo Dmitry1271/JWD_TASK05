@@ -1,4 +1,4 @@
-package by.tc.owndatastructures.util;
+package by.tc.owndatastructures.util.list;
 
 /**
  * Created by cplus on 25.11.2017.

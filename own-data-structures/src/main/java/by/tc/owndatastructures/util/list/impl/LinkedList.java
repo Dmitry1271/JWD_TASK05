@@ -1,14 +1,18 @@
-package by.tc.owndatastructures.util.impl;
+package by.tc.owndatastructures.util.list.impl;
 
 import by.tc.owndatastructures.exception.IndexOutListSizeException;
 import by.tc.owndatastructures.exception.NoListElementException;
-import by.tc.owndatastructures.util.Iterator;
-import by.tc.owndatastructures.util.Linked;
+import by.tc.owndatastructures.util.list.Iterator;
+import by.tc.owndatastructures.util.list.Linked;
+
+import java.io.Serializable;
 
 /**
  * Created by cplus on 25.11.2017.
  */
-public class LinkedList implements Linked {
+public class LinkedList implements Linked, Serializable, Cloneable {
+    private static final long serialVersionUID = -2194415995257282277L;
+
     private Node first;
     private Node last;
     private int size;

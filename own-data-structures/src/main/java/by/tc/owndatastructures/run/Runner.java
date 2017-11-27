@@ -1,12 +1,9 @@
 package by.tc.owndatastructures.run;
 
 import by.tc.owndatastructures.exception.IndexOutListSizeException;
-import by.tc.owndatastructures.util.Iterator;
-import by.tc.owndatastructures.util.Linked;
-import by.tc.owndatastructures.util.impl.LinkedList;
-import by.tc.owndatastructures.util.impl.SimpleList;
-
-import java.util.List;
+import by.tc.owndatastructures.util.list.Iterator;
+import by.tc.owndatastructures.util.list.Linked;
+import by.tc.owndatastructures.util.list.impl.LinkedList;
 
 
 /**

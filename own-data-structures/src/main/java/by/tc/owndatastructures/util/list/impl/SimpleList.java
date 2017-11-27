@@ -1,9 +1,9 @@
-package by.tc.owndatastructures.util.impl;
+package by.tc.owndatastructures.util.list.impl;
 
 
 import by.tc.owndatastructures.exception.IndexOutListSizeException;
-import by.tc.owndatastructures.util.Iterator;
-import by.tc.owndatastructures.util.Simple;
+import by.tc.owndatastructures.util.list.Iterator;
+import by.tc.owndatastructures.util.list.Simple;
 
 import java.io.Serializable;
 import java.util.Arrays;
