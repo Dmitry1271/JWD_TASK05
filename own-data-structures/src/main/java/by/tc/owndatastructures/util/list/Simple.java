@@ -10,6 +10,8 @@ public interface Simple extends Container {
 
     Object remove(int index);
 
+    boolean remove(Object value);
+
     int size();
 
     void update(int index, Object value);

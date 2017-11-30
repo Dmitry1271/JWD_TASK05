@@ -3,7 +3,10 @@ package by.tc.owndatastructures.run;
 import by.tc.owndatastructures.exception.IndexOutListSizeException;
 import by.tc.owndatastructures.util.list.Iterator;
 import by.tc.owndatastructures.util.list.Linked;
+import by.tc.owndatastructures.util.list.Simple;
 import by.tc.owndatastructures.util.list.impl.LinkedList;
+import by.tc.owndatastructures.util.list.impl.SimpleList;
+import by.tc.owndatastructures.util.tree.impl.BinaryTree;
 
 
 /**
@@ -96,7 +99,7 @@ public class Runner {
         System.out.println(list1);
         System.out.println(list2);*/
 
-        Linked list = new LinkedList();
+       /* Linked list = new LinkedList();
 
         //System.out.println(list.isEmpty());
         //System.out.println(list.size());
@@ -106,7 +109,7 @@ public class Runner {
         list.addLast(3);
         list.addFirst("fsd");
         list.addFirst("fsd1");
-        list.addFirst(null);
+        list.addFirst(null);*/
 
        /* System.out.println(list.removeFirst());
         System.out.println(list.removeFirst());
@@ -114,7 +117,7 @@ public class Runner {
         System.out.println(list.removeFirst());
         System.out.println(list.removeFirst());
         System.out.println(list.removeFirst());*/
-        System.out.println(list);
+        /*System.out.println(list);
 
         Linked linked = new LinkedList();
         linked.addFirst(3);
@@ -130,10 +133,29 @@ public class Runner {
         while (iter.hasNext()){
             System.out.println(iter.next());
         }
-        System.out.println(iter.hasNext());
+        System.out.println(iter.hasNext());*/
 
-
-
+        BinaryTree binaryTree = new BinaryTree();
+        binaryTree.add(1);
+        binaryTree.add(2);
+        binaryTree.add(3);
+        binaryTree.add(4);
+        binaryTree.add(5);
+        binaryTree.add(6);
+        binaryTree.add(7);
+        binaryTree.add(8);
+        binaryTree.add(9);
+        binaryTree.add(null);
+        binaryTree.add(11);
+        binaryTree.add(12);
+        binaryTree.add(13);
+        binaryTree.add(14);
+        binaryTree.add(15);
+        binaryTree.add(16);
+        System.out.println(binaryTree.preOrder());
+        System.out.println(binaryTree.postOrder());
+        System.out.println(binaryTree.inOrder());
+        System.out.println(binaryTree.contains(null));
 
     }
 }

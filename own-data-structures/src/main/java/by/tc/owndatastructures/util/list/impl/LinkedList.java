@@ -103,6 +103,16 @@ public class LinkedList implements Linked, Serializable, Cloneable {
     }
 
     @Override
+    public boolean remove(Object value) {
+        int index = indexOf(value);
+        if (index > 0) {
+            remove(index);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public int size() {
         return size;
     }
@@ -158,6 +168,25 @@ public class LinkedList implements Linked, Serializable, Cloneable {
         }
     }
 
+    private Node getIndexNode(int index) {
+        Node result = first.next;
+        for (int i = 0; i < index; ++i) {
+            result = result.next;
+        }
+        return result;
+    }
+
+    private int indexOf(Object value) {
+        Node node = first.next;
+        for (int i = 0; i < size; ++i) {
+            if (value != null ? value.equals(node.elem) : node.elem == null) {
+                return i;
+            }
+            node = node.next;
+        }
+        return -1;
+    }
+
     private class Node {
         private Object elem;
         private Node prev;
@@ -177,14 +206,6 @@ public class LinkedList implements Linked, Serializable, Cloneable {
         if (index < 0 || index >= size) {
             throw new IndexOutListSizeException("Index: " + index + ", Size: " + size);
         }
-    }
-
-    private Node getIndexNode(int index) {
-        Node result = first.next;
-        for (int i = 0; i < index; ++i) {
-            result = result.next;
-        }
-        return result;
     }
 
     @Override

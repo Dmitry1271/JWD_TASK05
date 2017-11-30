@@ -43,49 +43,8 @@ public class SimpleList implements Simple, Serializable, Cloneable {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SimpleList that = (SimpleList) o;
-
-        if (size != that.size) return false;
-
-        int count = 0;
-        Object elem;
-        Object thatElem;
-
-        for (int i = 0; i < size; ++i) {
-            elem = array[i];
-            thatElem = that.array[i];
-
-            if (elem != null ? elem.equals(thatElem) : thatElem == null) {
-                count++;
-            }
-        }
-        return count == size;
-    }
-
     public Iterator getIterator() {
         return new MyListIterator();
-    }
-
-    private class MyListIterator implements Iterator {
-        private int index;
-
-        @Override
-        public boolean hasNext() {
-            return index < size;
-        }
-
-        @Override
-        public Object next() {
-            if (!this.hasNext()) {
-                throw new IndexOutListSizeException("Index: " + index + ", Size: " + size);
-            }
-            return array[index++];
-        }
     }
 
     @Override
@@ -121,6 +80,16 @@ public class SimpleList implements Simple, Serializable, Cloneable {
     }
 
     @Override
+    public boolean remove(Object value) {
+        int index = indexOf(value);
+        if (index > 0) {
+            remove(index);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public int size() {
         return size;
     }
@@ -142,6 +111,56 @@ public class SimpleList implements Simple, Serializable, Cloneable {
             }
         }
         return false;
+    }
+
+    private int indexOf(Object value) {
+        for (int i = 0; i < size; ++i) {
+            if (value != null ? value.equals(array[i]) : array[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private class MyListIterator implements Iterator {
+        private int index;
+
+        @Override
+        public boolean hasNext() {
+            return index < size;
+        }
+
+        @Override
+        public Object next() {
+            if (!this.hasNext()) {
+                throw new IndexOutListSizeException("Index: " + index + ", Size: " + size);
+            }
+            return array[index++];
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SimpleList that = (SimpleList) o;
+
+        if (size != that.size) return false;
+
+        int count = 0;
+        Object elem;
+        Object thatElem;
+
+        for (int i = 0; i < size; ++i) {
+            elem = array[i];
+            thatElem = that.array[i];
+
+            if (elem != null ? elem.equals(thatElem) : thatElem == null) {
+                count++;
+            }
+        }
+        return count == size;
     }
 
     @Override
