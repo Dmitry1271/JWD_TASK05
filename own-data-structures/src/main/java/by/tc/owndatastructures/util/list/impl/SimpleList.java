@@ -11,29 +11,25 @@ import java.util.Arrays;
 /**
  * Created by cplus on 25.11.2017.
  */
-public class SimpleList implements Simple, Serializable, Cloneable {
+public class SimpleList<E> implements Simple<E>, Serializable, Cloneable {
     private static final long serialVersionUID = -7521721020811369924L;
     private static final int DEFAULT_SIZE = 10;
-
-    private Object[] array;
+    private E[] array;
     private int size;
 
     public SimpleList() {
-        array = new Object[DEFAULT_SIZE];
+        array = (E[]) new Object[DEFAULT_SIZE];
     }
 
     public SimpleList(int firstSize) {
-        array = new Object[firstSize];
+
+        array = (E[]) new Object[firstSize];
     }
 
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
 
     private void resize(int newSize) {
-        Object[] temp = array;
-        array = new Object[newSize];
+        E[] temp = array;
+        array = (E[]) new Object[newSize];
         System.arraycopy(temp, 0, array, 0, size);
     }
 
@@ -47,26 +43,36 @@ public class SimpleList implements Simple, Serializable, Cloneable {
         return new MyListIterator();
     }
 
+    private int indexOf(E elem) {
+        for (int i = 0; i < size; ++i) {
+            if (elem != null ? elem.equals(array[i]) : array[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     @Override
-    public boolean add(Object value) {
+    public boolean add(E elem) {
         if (size >= array.length) {
             resize(array.length * 2);
         }
-        array[size++] = value;
+        array[size++] = elem;
         return true;
     }
 
     @Override
-    public Object get(int index) {
+    public E get(int index) {
         checkRange(index);
+        E a = null;
         return array[index];
     }
 
     @Override
-    public Object remove(int index) {
+    public E remove(int index) {
         checkRange(index);
 
-        Object oldValue = array[index];
+        E oldValue = array[index];
         int numberElements = size - index - 1;
 
         if (numberElements > 0) {
@@ -76,13 +82,12 @@ public class SimpleList implements Simple, Serializable, Cloneable {
         array[--size] = null;
 
         return oldValue;
-
     }
 
     @Override
-    public boolean remove(Object value) {
-        int index = indexOf(value);
-        if (index > 0) {
+    public boolean remove(E elem) {
+        int index = indexOf(elem);
+        if (index >= 0) {
             remove(index);
             return true;
         }
@@ -95,34 +100,36 @@ public class SimpleList implements Simple, Serializable, Cloneable {
     }
 
     @Override
-    public void update(int index, Object value) {
+    public void update(int index, E elem) {
         checkRange(index);
-        array[index] = value;
+        array[index] = elem;
     }
 
     @Override
-    public boolean contains(Object value) {
-        Object elem;
+    public boolean contains(E elem) {
+        E current;
         for (int i = 0; i < size; ++i) {
-            elem = array[i];
+            current = array[i];
 
-            if (elem != null ? elem.equals(value) : value == null) {
+            if (current != null ? current.equals(elem) : elem == null) {
                 return true;
             }
         }
         return false;
     }
 
-    private int indexOf(Object value) {
-        for (int i = 0; i < size; ++i) {
-            if (value != null ? value.equals(array[i]) : array[i] == null) {
-                return i;
-            }
-        }
-        return -1;
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
     }
 
-    private class MyListIterator implements Iterator {
+    @Override
+    public E[] toArray(E[] array) {
+        System.arraycopy(this.array, 0, array, 0, size);
+        return array;
+    }
+
+    private class MyListIterator implements Iterator<E> {
         private int index;
 
         @Override
@@ -131,7 +138,7 @@ public class SimpleList implements Simple, Serializable, Cloneable {
         }
 
         @Override
-        public Object next() {
+        public E next() {
             if (!this.hasNext()) {
                 throw new IndexOutListSizeException("Index: " + index + ", Size: " + size);
             }
@@ -141,26 +148,26 @@ public class SimpleList implements Simple, Serializable, Cloneable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
-        SimpleList that = (SimpleList) o;
+        SimpleList<?> that = (SimpleList<?>) o;
 
-        if (size != that.size) return false;
+        if (size != that.size) {
+            return false;
+        }
 
-        int count = 0;
-        Object elem;
-        Object thatElem;
-
-        for (int i = 0; i < size; ++i) {
-            elem = array[i];
-            thatElem = that.array[i];
-
-            if (elem != null ? elem.equals(thatElem) : thatElem == null) {
-                count++;
+        for (int i = 0; i < size; i++) {
+            if (array[i] != null ? !that.array[i].equals(array[i]) : that.array[i] != null) {
+                return false;
             }
         }
-        return count == size;
+
+        return true;
     }
 
     @Override

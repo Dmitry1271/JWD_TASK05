@@ -3,14 +3,14 @@ package by.tc.owndatastructures.util.list;
 /**
  * Created by cplus on 25.11.2017.
  */
-public interface Linked extends Simple{
-    void addFirst(Object elem);
+public interface Linked<E> extends Simple<E>{
+    void addFirst(E elem);
 
-    void addLast(Object elem);
+    void addLast(E elem);
 
-    Object removeFirst();
+    E removeFirst();
 
-    Object removeLast();
+    E removeLast();
 
     int size();
 }

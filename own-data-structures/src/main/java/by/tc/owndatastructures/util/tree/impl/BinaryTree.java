@@ -9,25 +9,27 @@ import java.util.List;
 /**
  * Created by cplus on 27.11.2017.
  */
-public class BinaryTree implements Tree, Serializable, Cloneable {
+public class BinaryTree<E extends Comparable> implements Tree<E>, Serializable, Cloneable {
     private static final long serialVersionUID = -577133173077825018L;
 
     private Node root;
 
-    private List<Object> traverse;
-
     public BinaryTree() {
     }
 
-    public BinaryTree(Object elem) {
+    public BinaryTree(E elem) {
         root = new Node();
         root.elem = elem;
     }
 
     @Override
-    public boolean add(Object elem) {
+    public boolean add(E elem) {
+        if (elem == null) {
+            return false;
+        }
+
         if (root != null) {
-            root = insert(root, null, elem);
+            root = insert(root, elem);
         } else {
             root = new Node();
             root.elem = elem;
@@ -36,114 +38,153 @@ public class BinaryTree implements Tree, Serializable, Cloneable {
     }
 
     @Override
-    public void remove(Object elem) {
-
+    public boolean remove(E elem) {
+        if (search(elem, root) != null) {
+            remove(elem, root);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean contains(Object elem) {
-        return preOrder().contains(elem);
+    public boolean search(E elem) {
+        return search(elem, root) != null;
     }
 
     @Override
-    public List<Object> preOrder() {
-        traverse = new ArrayList<>();
-        preOrder(root);
-        return traverse;
+    public List<E> preOrder() {
+        List<E> list = new ArrayList<>();
+        return preOrder(root, list);
     }
 
 
     @Override
-    public List<Object> inOrder() {
-        traverse = new ArrayList<>();
-        inOrder(root);
-        return traverse;
+    public List<E> inOrder() {
+        List<E> list = new ArrayList<>();
+        return inOrder(root, list);
     }
 
     @Override
-    public List<Object> postOrder() {
-        traverse = new ArrayList<>();
-        postOrder(root);
-        return traverse;
+    public List<E> postOrder() {
+        List<E> list = new ArrayList<>();
+        return postOrder(root, list);
     }
 
-    private Node insert(Node node, Node parent, Object elem) {
+    private Node insert(Node node, E elem) {
         if (node == null) {
             node = new Node();
             node.elem = elem;
-            node.parent = parent;
-        } else if (goLeft(node)) {
-            node.left = insert(node.left, node, elem);
+        } else if (elem.compareTo(node.elem) < 0) {
+            node.left = insert(node.left, elem);
         } else {
-            node.right = insert(node.right, node, elem);
+            node.right = insert(node.right, elem);
         }
         return node;
     }
 
-    private boolean goLeft(Node node) {
-        int depthLeft = getDepth(node.left, 0);
-        int depthRight = getDepth(node.right, 0);
+    private Node search(E elem, Node node) {
+        if (node == null) {
+            return null;
+        }
 
-        return depthLeft == depthRight;
+        if (node.elem.equals(elem)) {
+            return node;
+        } else {
+
+            if (elem.compareTo(node.elem) < 0) {
+                node = search(elem, node.left);
+            } else {
+                node = search(elem, node.right);
+            }
+
+        }
+        return node;
     }
 
-    private int getDepth(Node node, int depth) {
-        if (node != null) {
-            depth = getDepth(node.right, depth + 1);
+    private Node remove(E elem, Node node) {
+        if (elem.compareTo(node.elem) < 0) {
+            node.left = remove(elem, node.left);
+        } else if (elem.compareTo(node.elem) > 0) {
+            node.right = remove(elem, node.right);
+        } else if (node.left != null && node.right != null) {
+            node.elem = getMin(node.right).elem;
+            node.right = remove(node.elem, node.right);
+        } else {
+            if (node.left != null) {
+                node = node.left;
+            } else {
+                node = node.right;
+            }
         }
-        return depth;
+        return node;
     }
 
-
-    private void preOrder(Node node) {
-        if (node != null) {
-            traverse.add(node.elem);
-            preOrder(node.left);
-            preOrder(node.right);
+    private Node getMin(Node node) {
+        if (node.left != null) {
+            node = getMin(node.left);
         }
+
+        return node;
     }
 
-    private void inOrder(Node node) {
+    private List<E> preOrder(Node node, List<E> list) {
         if (node != null) {
-            inOrder(node.left);
-            traverse.add(node.elem);
-            inOrder(node.right);
+            list.add(node.elem);
+            preOrder(node.left, list);
+            preOrder(node.right, list);
         }
+        return list;
     }
 
-    private void postOrder(Node node) {
+    private List<E> inOrder(Node node, List<E> list) {
         if (node != null) {
-            postOrder(node.left);
-            postOrder(node.right);
-            traverse.add(node.elem);
+            inOrder(node.left, list);
+            list.add(node.elem);
+            inOrder(node.right, list);
         }
+        return list;
+    }
+
+    private List<E> postOrder(Node node, List<E> list) {
+        if (node != null) {
+            postOrder(node.left, list);
+            postOrder(node.right, list);
+            list.add(node.elem);
+        }
+        return list;
     }
 
     private class Node {
-        Object elem;
+        E elem;
         Node left;
         Node right;
-        Node parent;
 
         Node() {
         }
 
-        Node(Object elem, Node left, Node right, Node parent) {
+        Node(E elem, Node left, Node right) {
             this.elem = elem;
             this.left = left;
             this.right = right;
-            this.parent = parent;
         }
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
 
             Node node = (Node) o;
 
-            if (elem != null ? !elem.equals(node.elem) : node.elem != null) return false;
-            if (left != null ? !left.equals(node.left) : node.left != null) return false;
+            if (elem != null ? !elem.equals(node.elem) : node.elem != null) {
+                return false;
+            }
+            if (left != null ? !left.equals(node.left) : node.left != null) {
+                return false;
+            }
             return right != null ? right.equals(node.right) : node.right == null;
         }
 
@@ -157,22 +198,29 @@ public class BinaryTree implements Tree, Serializable, Cloneable {
 
         @Override
         public String toString() {
-            return "Node{" +
+            return "\nNode{" +
                     "elem=" + elem +
-                    ", left=" + left +
-                    ", right=" + right +
+                    ",left=" + left +
+                    ",right=" + right +
                     '}';
         }
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         BinaryTree that = (BinaryTree) o;
 
-        return root != null ? root.equals(that.root) : that.root == null;
+        if (root != null ? root.equals(that.root) : that.root == null) {
+            return true;
+        }
+        return that.preOrder().equals(preOrder());
     }
 
     @Override

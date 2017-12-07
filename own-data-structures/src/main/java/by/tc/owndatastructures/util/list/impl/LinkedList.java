@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * Created by cplus on 25.11.2017.
  */
-public class LinkedList implements Linked, Serializable, Cloneable {
+public class LinkedList<E> implements Linked<E>, Serializable, Cloneable {
     private static final long serialVersionUID = -2194415995257282277L;
 
     private Node first;
@@ -27,7 +27,7 @@ public class LinkedList implements Linked, Serializable, Cloneable {
     }
 
     @Override
-    public void addFirst(Object elem) {
+    public void addFirst(E elem) {
         Node next = first;
         next.elem = elem;
         first = new Node(null, null, next);
@@ -36,7 +36,7 @@ public class LinkedList implements Linked, Serializable, Cloneable {
     }
 
     @Override
-    public void addLast(Object elem) {
+    public void addLast(E elem) {
         Node prev = last;
         prev.elem = elem;
         last = new Node(null, prev, null);
@@ -45,14 +45,14 @@ public class LinkedList implements Linked, Serializable, Cloneable {
     }
 
     @Override
-    public Object removeFirst() {
+    public E removeFirst() {
         if (isEmpty()) {
             throw new NoListElementException("Size: " + size);
         }
 
         Node forRemove = first.next;
 
-        Object elem = forRemove.elem;
+        E elem = forRemove.elem;
         first.next = forRemove.next;
 
         size--;
@@ -60,13 +60,13 @@ public class LinkedList implements Linked, Serializable, Cloneable {
     }
 
     @Override
-    public Object removeLast() {
+    public E removeLast() {
         if (isEmpty()) {
             throw new NoListElementException("Size: " + size);
         }
         Node forRemove = last.prev;
 
-        Object elem = forRemove.elem;
+        E elem = forRemove.elem;
         last.prev = forRemove.prev;
 
         size--;
@@ -74,23 +74,23 @@ public class LinkedList implements Linked, Serializable, Cloneable {
     }
 
     @Override
-    public boolean add(Object value) {
-        addLast(value);
+    public boolean add(E elem) {
+        addLast(elem);
         return true;
     }
 
     @Override
-    public Object get(int index) {
+    public E get(int index) {
         checkRange(index);
         return getIndexNode(index).elem;
 
     }
 
     @Override
-    public Object remove(int index) {
+    public E remove(int index) {
         checkRange(index);
         Node forRemove = getIndexNode(index);
-        Object elem = forRemove.elem;
+        E elem = forRemove.elem;
 
         Node next = forRemove.next;
         Node prev = forRemove.prev;
@@ -103,8 +103,8 @@ public class LinkedList implements Linked, Serializable, Cloneable {
     }
 
     @Override
-    public boolean remove(Object value) {
-        int index = indexOf(value);
+    public boolean remove(E elem) {
+        int index = indexOf(elem);
         if (index > 0) {
             remove(index);
             return true;
@@ -118,15 +118,15 @@ public class LinkedList implements Linked, Serializable, Cloneable {
     }
 
     @Override
-    public void update(int index, Object value) {
+    public void update(int index, E elem) {
         checkRange(index);
-        getIndexNode(index).elem = value;
+        getIndexNode(index).elem = elem;
     }
 
     @Override
-    public boolean contains(Object value) {
+    public boolean contains(E value) {
         Node node = first;
-        Object elem;
+        E elem;
         for (int i = 0; i < size; ++i) {
             node = node.next;
             elem = node.elem;
@@ -143,11 +143,21 @@ public class LinkedList implements Linked, Serializable, Cloneable {
     }
 
     @Override
+    public E[] toArray(E[] array) {
+        Node node = first.next;
+        for (int i = 0; i < size; ++i) {
+            array[i] = node.elem;
+            node = node.next;
+        }
+        return array;
+    }
+
+    @Override
     public Iterator getIterator() {
         return new LinkedIterator();
     }
 
-    private class LinkedIterator implements Iterator {
+    private class LinkedIterator implements Iterator<E> {
         private int index;
         private Node current = first.next;
 
@@ -157,11 +167,11 @@ public class LinkedList implements Linked, Serializable, Cloneable {
         }
 
         @Override
-        public Object next() {
+        public E next() {
             if (!this.hasNext()) {
                 throw new IndexOutListSizeException("Index: " + index + ", Size: " + size);
             }
-            Object elem = current.elem;
+            E elem = current.elem;
             current = current.next;
             index++;
             return elem;
@@ -176,7 +186,7 @@ public class LinkedList implements Linked, Serializable, Cloneable {
         return result;
     }
 
-    private int indexOf(Object value) {
+    private int indexOf(E value) {
         Node node = first.next;
         for (int i = 0; i < size; ++i) {
             if (value != null ? value.equals(node.elem) : node.elem == null) {
@@ -188,14 +198,14 @@ public class LinkedList implements Linked, Serializable, Cloneable {
     }
 
     private class Node {
-        private Object elem;
+        private E elem;
         private Node prev;
         private Node next;
 
         Node() {
         }
 
-        Node(Object elem, Node prev, Node next) {
+        Node(E elem, Node prev, Node next) {
             this.elem = elem;
             this.prev = prev;
             this.next = next;

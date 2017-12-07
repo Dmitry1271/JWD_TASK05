@@ -3,20 +3,22 @@ package by.tc.owndatastructures.util.list;
 /**
  * Created by cplus on 25.11.2017.
  */
-public interface Simple extends Container {
-    boolean add(Object value);
+public interface Simple<E> extends Container {
+    boolean add(E value);
 
-    Object get(int index);
+    E get(int index);
 
-    Object remove(int index);
+    E remove(int index);
 
-    boolean remove(Object value);
+    boolean remove(E value);
 
     int size();
 
-    void update(int index, Object value);
+    void update(int index, E value);
 
-    boolean contains(Object value);
+    boolean contains(E value);
 
     boolean isEmpty();
+
+    E[] toArray(E[] array);
 }

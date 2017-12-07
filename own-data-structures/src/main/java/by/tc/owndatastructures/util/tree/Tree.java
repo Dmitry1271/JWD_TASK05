@@ -5,16 +5,16 @@ import java.util.List;
 /**
  * Created by cplus on 27.11.2017.
  */
-public interface Tree {
-    boolean add(Object elem);
+public interface Tree<E extends Comparable> {
+    boolean add(E elem);
 
-    void remove(Object elem);
+    boolean remove(E elem);
 
-    boolean contains(Object elem);
+    boolean search(E elem);
 
-    List<Object> preOrder();
+    List<E> preOrder();
 
-    List<Object> inOrder();
+    List<E> inOrder();
 
-    List<Object> postOrder();
+    List<E> postOrder();
 }
